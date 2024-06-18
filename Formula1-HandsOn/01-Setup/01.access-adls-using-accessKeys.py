@@ -8,15 +8,25 @@
 # COMMAND ----------
 
 spark.conf.set(
-    "fs.azure.account.key.adlsacde.dfs.core.windows.net",
-    'Account_key'
-)
+    "fs.azure.account.key.acdeadls.dfs.core.windows.net",
+    adls_account_key)
 
 # COMMAND ----------
 
-# dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net')
-display(dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net'))
+dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net')
+# display(dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net'))
 
 # COMMAND ----------
 
-display(spark.read.csv('abfss://demo@adlsacde.dfs.core.windows.net/circuits.csv'))
+import pandas as pd
+df_circuits = pd.read_csv('https://raw.githubusercontent.com/CloudDataEngineering/acde_databricks/main/raw/files/formula1/circuits.csv')
+# display(df_circuits)
+
+# COMMAND ----------
+
+df = spark.createDataFrame(df_circuits)
+df.write.format('csv').option('header', 'true').mode('overwrite').save('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv')
+
+# COMMAND ----------
+
+display(spark.read.option('header', 'true').csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv'))
