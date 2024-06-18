@@ -10,9 +10,9 @@
 
 # dbutils.secrets.listScopes()
 # dbutils.secrets.list('formula1-scope')
-client_id = dbutils.secrets.get(scope = "formula1-scope", key = "adlsacde-client-id")
-tenant_id = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-tenant-id')
-client_secret = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-client-secret')
+client_id = dbutils.secrets.get(scope = "lti-scope", key = "client-id")
+tenant_id = dbutils.secrets.get(scope = 'lti-scope', key = 'tenant-id')
+client_secret = dbutils.secrets.get(scope = 'lti-scope', key = 'client-secret')
 
 # COMMAND ----------
 
@@ -32,17 +32,17 @@ client_secret = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-cl
 
 #---------------------------------------------------------------------------------------------
 
-spark.conf.set("fs.azure.account.auth.type.adlsacde.dfs.core.windows.net", "OAuth")
-spark.conf.set("fs.azure.account.oauth.provider.type.adlsacde.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
-spark.conf.set("fs.azure.account.oauth2.client.id.adlsacde.dfs.core.windows.net", client_id)
-spark.conf.set("fs.azure.account.oauth2.client.secret.adlsacde.dfs.core.windows.net", client_secret)
-spark.conf.set("fs.azure.account.oauth2.client.endpoint.adlsacde.dfs.core.windows.net", f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
+spark.conf.set("fs.azure.account.auth.type.acdeadls.dfs.core.windows.net", "OAuth")
+spark.conf.set("fs.azure.account.oauth.provider.type.acdeadls.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider")
+spark.conf.set("fs.azure.account.oauth2.client.id.acdeadls.dfs.core.windows.net", client_id)
+spark.conf.set("fs.azure.account.oauth2.client.secret.acdeadls.dfs.core.windows.net", client_secret)
+spark.conf.set("fs.azure.account.oauth2.client.endpoint.acdeadls.dfs.core.windows.net", f"https://login.microsoftonline.com/{tenant_id}/oauth2/token")
 
 # COMMAND ----------
 
-# dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net')
-display(dbutils.fs.ls('abfss://raw@adlsacde.dfs.core.windows.net'))
+dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net')
+# display(dbutils.fs.ls('abfss://raw@acdeadls.dfs.core.windows.net'))
 
 # COMMAND ----------
 
-display(spark.read.csv('abfss://demo@adlsacde.dfs.core.windows.net/circuits.csv',header=True))
+display(spark.read.csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv',header=True))

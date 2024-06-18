@@ -10,10 +10,10 @@
 # COMMAND ----------
 
 # dbutils.secrets.listScopes()
-# dbutils.secrets.list('formula1-scope')
-client_id = dbutils.secrets.get(scope = "formula1-scope", key = "adlsacde-client-id")
-tenant_id = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-tenant-id')
-client_secret = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-client-secret')
+# dbutils.secrets.list('lti-scope')
+client_id = dbutils.secrets.get(scope = "lti-scope", key = "client-id")
+tenant_id = dbutils.secrets.get(scope = 'lti-scope', key = 'tenant-id')
+client_secret = dbutils.secrets.get(scope = 'lti-scope', key = 'client-secret')
 
 # COMMAND ----------
 
@@ -26,20 +26,20 @@ configs = {"fs.azure.account.auth.type": "OAuth",
 # COMMAND ----------
 
 dbutils.fs.mount(
-  source = "abfss://demo@adlsacde.dfs.core.windows.net/",
-  mount_point = "/mnt/adlsacde/demo",
+  source = "abfss://demo@acdeadls.dfs.core.windows.net/",
+  mount_point = "/mnt/acdeadls/demo",
   extra_configs = configs)
 
 # COMMAND ----------
 
-# dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net')
-# display(dbutils.fs.ls('abfss://raw@adlsacde.dfs.core.windows.net'))
-display(dbutils.fs.ls('/mnt/adlsacde/'))
+# dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net')
+# display(dbutils.fs.ls('abfss://raw@acdeadls.dfs.core.windows.net'))
+display(dbutils.fs.ls('/mnt/acdeadls/'))
 
 # COMMAND ----------
 
 # DBTITLE 1,spark read csv with header
-display(spark.read.csv('/mnt/adlsacde/demo/circuits.csv',header = True))
+display(spark.read.csv('/mnt/acdeadls/demo/circuits.csv',header = True))
 
 # COMMAND ----------
 
@@ -50,4 +50,4 @@ display(dbutils.fs.mounts())
 # COMMAND ----------
 
 # DBTITLE 1,Unmount Azure Data Lake Storage
-# dbutils.fs.unmount('/mnt/adlsacde/demo')
+# dbutils.fs.unmount('/mnt/acdeadls/demo')

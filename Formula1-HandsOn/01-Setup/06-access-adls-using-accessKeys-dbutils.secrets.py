@@ -8,22 +8,22 @@
 # COMMAND ----------
 
 # dbutils.secrets.listScopes()
-# dbutils.secrets.list("formula1-scope")
-# dbutils.secrets.get(scope="formula1-scope", key="adlsacde-account-key")
-formula1dl_accountkey = dbutils.secrets.get(scope="formula1-scope", key="adlsacde-account-key")
+# dbutils.secrets.list("lti-scope")
+# dbutils.secrets.get(scope="lti-scope", key="acdeadls")
+# formula1dl_accountkey = dbutils.secrets.get(scope="lti-scope", key="acdeadls")
 # display(formula1dl_accountkey)
 
 # COMMAND ----------
 
 spark.conf.set(
-    "fs.azure.account.key.adlsacde.dfs.core.windows.net",
+    "fs.azure.account.key.acdeadls.dfs.core.windows.net",
     formula1dl_accountkey)
 
 # COMMAND ----------
 
-# dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net')
-display(dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net'))
+# dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net')
+display(dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net'))
 
 # COMMAND ----------
 
-display(spark.read.csv('abfss://demo@adlsacde.dfs.core.windows.net/circuits.csv'))
+display(spark.read.option('header', 'true').csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv'))
