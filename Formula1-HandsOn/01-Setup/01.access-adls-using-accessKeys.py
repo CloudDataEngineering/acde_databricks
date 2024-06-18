@@ -7,6 +7,10 @@
 
 # COMMAND ----------
 
+adls_account_key = dbutils.secrets.get(scope= 'lti-scope', key = 'acdeadls')
+
+# COMMAND ----------
+
 spark.conf.set(
     "fs.azure.account.key.acdeadls.dfs.core.windows.net",
     adls_account_key)
@@ -29,4 +33,4 @@ df.write.format('csv').option('header', 'true').mode('overwrite').save('abfss://
 
 # COMMAND ----------
 
-display(spark.read.option('header', 'true').csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv'))
+display(spark.read.option('header', 'true').csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv').limit(10))

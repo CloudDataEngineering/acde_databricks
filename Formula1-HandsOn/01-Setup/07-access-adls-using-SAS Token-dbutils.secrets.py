@@ -8,9 +8,9 @@
 # COMMAND ----------
 
 # dbutils.secrets.listScopes()
-# dbutils.secrets.list('formula1-scope')
-# dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-sas-token')
-formula1_sas_key = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-sas-token')
+# dbutils.secrets.list('lti-scope')
+# dbutils.secrets.get(scope = 'lti-scope', key = 'adls-sas-key')
+formula1_sas_key = dbutils.secrets.get(scope = 'lti-scope', key = 'adls-sas-key')
 
 # COMMAND ----------
 
@@ -18,15 +18,15 @@ formula1_sas_key = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde
 # spark.conf.set("fs.azure.sas.token.provider.type.<storage-account>.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.sas.FixedSASTokenProvider")
 # spark.conf.set("fs.azure.sas.fixed.token.<storage-account>.dfs.core.windows.net", dbutils.secrets.get(scope="<scope>", key="<sas-token-key>"))
 
-spark.conf.set("fs.azure.account.auth.type.adlsacde.dfs.core.windows.net", "SAS")
-spark.conf.set("fs.azure.sas.token.provider.type.adlsacde.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.sas.FixedSASTokenProvider")
-spark.conf.set("fs.azure.sas.fixed.token.adlsacde.dfs.core.windows.net", formula1_sas_key)
+spark.conf.set("fs.azure.account.auth.type.acdeadls.dfs.core.windows.net", "SAS")
+spark.conf.set("fs.azure.sas.token.provider.type.acdeadls.dfs.core.windows.net", "org.apache.hadoop.fs.azurebfs.sas.FixedSASTokenProvider")
+spark.conf.set("fs.azure.sas.fixed.token.acdeadls.dfs.core.windows.net", formula1_sas_key)
 
 # COMMAND ----------
 
-# dbutils.fs.ls('abfss://demo@adlsacde.dfs.core.windows.net')
-display(dbutils.fs.ls('abfss://raw@adlsacde.dfs.core.windows.net'))
+dbutils.fs.ls('abfss://demo@acdeadls.dfs.core.windows.net')
+# display(dbutils.fs.ls('abfss://raw@acdeadls.dfs.core.windows.net'))
 
 # COMMAND ----------
 
-display(spark.read.csv('abfss://demo@adlsacde.dfs.core.windows.net/circuits.csv'))
+display(spark.read.option('header', 'true').csv('abfss://demo@acdeadls.dfs.core.windows.net/circuits.csv'))

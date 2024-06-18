@@ -4,12 +4,19 @@
 
 # COMMAND ----------
 
+# dbutils.fs.ls("/mnt/acdeadls/")
+# dbutils.fs.mkdirs("/mnt/acdeadls/raw")
+# dbutils.fs.mkdirs("/mnt/acdeadls/processed")
+# dbutils.fs.mkdirs("/mnt/acdeadls/presentation")
+
+# COMMAND ----------
+
 # DBTITLE 1,Mount Azure Data Lake Storage
 def mount_adls(storage_account_name, container_name):
     # Get Secrets from Key Vault
-    client_id = dbutils.secrets.get(scope = "formula1-scope", key = "adlsacde-client-id")
-    tenant_id = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-tenant-id')
-    client_secret = dbutils.secrets.get(scope = 'formula1-scope', key = 'adlsacde-client-secret')
+    client_id = dbutils.secrets.get(scope = "lti-scope", key = "client-id")
+    tenant_id = dbutils.secrets.get(scope = 'lti-scope', key = 'tenant-id')
+    client_secret = dbutils.secrets.get(scope = 'lti-scope', key = 'client-secret')
 
     # Set Spark Configurations
     configs = {"fs.azure.account.auth.type": "OAuth",
@@ -37,16 +44,20 @@ def mount_adls(storage_account_name, container_name):
 
 # COMMAND ----------
 
-mount_adls(storage_account_name = "adlsacde", container_name = "raw")
+mount_adls(storage_account_name = "acdeadls", container_name = "raw")
 
 # COMMAND ----------
 
-mount_adls(storage_account_name = "adlsacde", container_name = "processed")
+mount_adls(storage_account_name = "acdeadls", container_name = "processed")
 
 # COMMAND ----------
 
-mount_adls(storage_account_name = "adlsacde", container_name = "presentation")
+mount_adls(storage_account_name = "acdeadls", container_name = "presentation")
 
 # COMMAND ----------
 
-mount_adls(storage_account_name = "adlsacde", container_name = "demo")
+mount_adls(storage_account_name = "acdeadls", container_name = "demo")
+
+# COMMAND ----------
+
+display(dbutils.fs.mounts())
