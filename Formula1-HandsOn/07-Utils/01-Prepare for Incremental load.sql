@@ -14,7 +14,7 @@ show tables;
 drop database if exists hive_metastore.f1_processed cascade;
 
 create database if not exists hive_metastore.f1_processed
-location '/mnt/adlsacde/processed';
+location '/mnt/acdeadls/processed';
 
 show databases;
 
@@ -28,7 +28,7 @@ show tables;
 drop database if exists f1_presentation cascade;
 
 create database if not exists f1_presentation
-location '/mnt/adlsacde/presentation';
+location '/mnt/acdeadls/presentation';
 
 use hive_metastore.f1_presentation;
 show tables;

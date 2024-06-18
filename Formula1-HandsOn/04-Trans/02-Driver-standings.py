@@ -1,5 +1,5 @@
 # Databricks notebook source
-# MAGIC %run "/Workspace/Users/azureclouddataengineering@gmail.com/Formula1-HandsOn/03-Includes/01-Configuration"
+# MAGIC %run "../03-Includes/01-Configuration"
 
 # COMMAND ----------
 

@@ -4,11 +4,11 @@ v_file_date = dbutils.widgets.get("p_file_date")
 
 # COMMAND ----------
 
-# MAGIC %run "/Workspace/Users/azureclouddataengineering@gmail.com/Formula1-HandsOn/03-Includes/01-Configuration"
+# MAGIC %run "../03-Includes/01-Configuration"
 
 # COMMAND ----------
 
-# MAGIC %run "/Workspace/Users/azureclouddataengineering@gmail.com/Formula1-HandsOn/03-Includes/02-common_functions"
+# MAGIC %run "../03-Includes/02-common_functions"
 
 # COMMAND ----------
 

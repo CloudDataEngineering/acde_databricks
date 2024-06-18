@@ -10,10 +10,10 @@
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-# display(dbutils.fs.ls("dbfs:/mnt/adlsacde/raw/results.json"))
+# display(dbutils.fs.ls("dbfs:/mnt/acdeadls/raw/results.json"))
 
-# display(spark.read.format("json").load("/mnt/adlsacde/raw/results.json"))
-# df = spark.read.format("json").option('inferSchema', 'true') .load("/mnt/adlsacde/raw/results.json")
+# display(spark.read.format("json").load("/mnt/acdeadls/raw/results.json"))
+# df = spark.read.format("json").option('inferSchema', 'true') .load("/mnt/acdeadls/raw/results.json")
 
 # display(df.printSchema())
 # df.schema
@@ -40,7 +40,7 @@ results_schema = StructType([StructField('resultId', IntegerType(), False),
                              StructField('statusId', StringType(), True), 
                              ])
 
-result_df = spark.read.format("json").schema(results_schema).load("/mnt/adlsacde/raw/results.json")
+result_df = spark.read.format("json").schema(results_schema).load("/mnt/acdeadls/raw/results.json")
 
 display(result_df.limit(10))
 
@@ -87,12 +87,12 @@ display(results_final_df.limit(10))
 
 # COMMAND ----------
 
-# results_final_df.write.mode('overwrite').parquet('/mnt/adlsacde/processed/results')
+# results_final_df.write.mode('overwrite').parquet('/mnt/acdeadls/processed/results')
 
-# results_final_df.write.mode('overwrite').partitionBy('race_id').parquet('/mnt/adlsacde/processed/results_by_id')
+# results_final_df.write.mode('overwrite').partitionBy('race_id').parquet('/mnt/acdeadls/processed/results_by_id')
 
 results_final_df.write.mode('overwrite').format('parquet').saveAsTable('hive_metastore.f1_processed.results')
 
 results_final_df.write.mode('overwrite').partitionBy('race_id').format('parquet').saveAsTable('hive_metastore.f1_processed.results_by_id')
 
-display(spark.read.parquet('/mnt/adlsacde/processed/results_by_id').limit(10))
+display(spark.read.parquet('/mnt/acdeadls/processed/results_by_id').limit(10))

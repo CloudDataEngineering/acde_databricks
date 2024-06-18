@@ -20,9 +20,9 @@ SELECT current_database();
 
 -- MAGIC %python
 -- MAGIC # display(dbutils.fs.mounts())
--- MAGIC # display(dbutils.fs.ls('/mnt/adlsacde/raw'))
--- MAGIC # display(spark.read.option('header', 'true').csv('dbfs:/mnt/adlsacde/raw/circuits.csv').limit(10))
--- MAGIC # circuits = spark.read.option('header', 'true').csv('dbfs:/mnt/adlsacde/raw/circuits.csv').limit(10)
+-- MAGIC # display(dbutils.fs.ls('/mnt/acdeadls/raw'))
+-- MAGIC # display(spark.read.option('header', 'true').csv('dbfs:/mnt/acdeadls/raw/circuits.csv').limit(10))
+-- MAGIC # circuits = spark.read.option('header', 'true').csv('dbfs:/mnt/acdeadls/raw/circuits.csv').limit(10)
 -- MAGIC # circuits.write.format('csv').saveAsTable('hive_metastore.demo.circuits')
 -- MAGIC
 -- MAGIC # display(spark.sql('select * from hive_metastore.demo.circuits'));
@@ -30,7 +30,7 @@ SELECT current_database();
 
 -- COMMAND ----------
 
-SELECT * FROM csv.`/mnt/adlsacde/raw/circuits.csv` LIMIT 10;
+SELECT * FROM csv.`/mnt/acdeadls/raw/circuits.csv` LIMIT 10;
 
 -- COMMAND ----------
 
@@ -48,13 +48,13 @@ alt	int,
 url	string
 )
 using csv
-options(path '/mnt/adlsacde/raw/circuits.csv', header true);
+options(path '/mnt/acdeadls/raw/circuits.csv', header true);
 
 select * from f1_raw.circuits limit 10;
 
 -- COMMAND ----------
 
-select * from csv.`/mnt/adlsacde/raw/races.csv` limit 10;
+select * from csv.`/mnt/acdeadls/raw/races.csv` limit 10;
 
 -- COMMAND ----------
 
@@ -77,7 +77,7 @@ create table if not exists f1_raw.races
   url string
 )
 using csv
-options(path '/mnt/adlsacde/raw/races.csv', header true);
+options(path '/mnt/acdeadls/raw/races.csv', header true);
 
 select * from f1_raw.races limit 10;
 
@@ -95,7 +95,7 @@ select * from f1_raw.races limit 10;
 
 -- COMMAND ----------
 
--- select * from json.`/mnt/adlsacde/raw/constructors.json` limit 10;
+-- select * from json.`/mnt/acdeadls/raw/constructors.json` limit 10;
 
 drop table if exists f1_raw.constructors;
 
@@ -108,7 +108,7 @@ nationality STRING,
 url STRING
 )
 using json
-options(path '/mnt/adlsacde/raw/constructors.json');
+options(path '/mnt/acdeadls/raw/constructors.json');
 
 select * from f1_raw.constructors limit 10;
 
@@ -121,7 +121,7 @@ select * from f1_raw.constructors limit 10;
 
 -- COMMAND ----------
 
--- select * from json.`/mnt/adlsacde/raw/drivers.json` limit 10;
+-- select * from json.`/mnt/acdeadls/raw/drivers.json` limit 10;
 
 drop table if exists f1_raw.drivers;
 
@@ -136,7 +136,7 @@ number string,
 url string
 )
 using json
-options(path '/mnt/adlsacde/raw/drivers.json', header true);
+options(path '/mnt/acdeadls/raw/drivers.json', header true);
 
 select * from f1_raw.drivers limit 10;
 
@@ -149,7 +149,7 @@ select * from f1_raw.drivers limit 10;
 
 -- COMMAND ----------
 
--- select * from json.`/mnt/adlsacde/raw/results.json` limit 10;
+-- select * from json.`/mnt/acdeadls/raw/results.json` limit 10;
 
 drop table if exists f1_raw.results;
 
@@ -175,7 +175,7 @@ statusId int,
 time string
 )
 using json
-options(path '/mnt/adlsacde/raw/results.json');
+options(path '/mnt/acdeadls/raw/results.json');
 
 select * from f1_raw.results limit 10;
 
@@ -188,7 +188,7 @@ select * from f1_raw.results limit 10;
 
 -- COMMAND ----------
 
--- select * from json.`/mnt/adlsacde/raw/pit_stops.json` limit 10;
+-- select * from json.`/mnt/acdeadls/raw/pit_stops.json` limit 10;
 
 drop table if exists f1_raw.pit_stops;
 
@@ -203,7 +203,7 @@ duration string,
 milliseconds int
 )
 using json
-options(path '/mnt/adlsacde/raw/pit_stops.json', multiline true);
+options(path '/mnt/acdeadls/raw/pit_stops.json', multiline true);
 
 select * from f1_raw.pit_stops limit 10;
 
@@ -221,7 +221,7 @@ select * from f1_raw.pit_stops limit 10;
 
 -- COMMAND ----------
 
--- SELECT * FROM csv.`/mnt/adlsacde/raw/lap_times/` limit 10;
+-- SELECT * FROM csv.`/mnt/acdeadls/raw/lap_times/` limit 10;
 
 drop table if exists f1_raw.lap_times;
 
@@ -235,7 +235,7 @@ time string,
 milliseconds int
 )
 using csv
-options(path '/mnt/adlsacde/raw/lap_times');
+options(path '/mnt/acdeadls/raw/lap_times');
 
 select * from f1_raw.lap_times limit 10;
 
@@ -249,7 +249,7 @@ select * from f1_raw.lap_times limit 10;
 
 -- COMMAND ----------
 
--- SELECT * FROM JSON.`/mnt/adlsacde/raw/qualifying/` limit 10;
+-- SELECT * FROM JSON.`/mnt/acdeadls/raw/qualifying/` limit 10;
 
 drop table if exists f1_raw.qualifying;
 
@@ -266,7 +266,7 @@ qualifyId int,
 raceId int
 )
 using json
-options(path '/mnt/adlsacde/raw/qualifying', multiline true);
+options(path '/mnt/acdeadls/raw/qualifying', multiline true);
 
 select * from f1_raw.qualifying limit 10;
 

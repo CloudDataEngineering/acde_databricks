@@ -23,26 +23,26 @@ display(dbutils.fs.mounts())
 
 # COMMAND ----------
 
-import pandas as pd
-from pyspark.sql import SparkSession
+# import pandas as pd
+# from pyspark.sql import SparkSession
 
-# Create SparkSession
-spark = SparkSession.builder.getOrCreate()
+# # Create SparkSession
+# spark = SparkSession.builder.getOrCreate()
 
-# Read the pandas DataFrame
-df_circuits = pd.read_csv('https://raw.githubusercontent.com/CloudDataEngineering/acde_databricks/main/raw/files/formula1/circuits.csv')
+# # Read the pandas DataFrame
+# df_circuits = pd.read_csv('https://raw.githubusercontent.com/CloudDataEngineering/acde_databricks/main/raw/files/formula1/circuits.csv')
 
-# Convert pandas DataFrame to Spark DataFrame
-spark_df_circuits = spark.createDataFrame(df_circuits)
+# # Convert pandas DataFrame to Spark DataFrame
+# spark_df_circuits = spark.createDataFrame(df_circuits)
 
-# Write Spark DataFrame to CSV
-spark_df_circuits.write.mode('overwrite').option('header', 'true').option('inferSchema', 'true').format('csv').save(f'{raw_folder_path}/circuits.csv')
+# # Write Spark DataFrame to CSV
+# spark_df_circuits.write.mode('overwrite').option('header', 'true').option('inferSchema', 'true').format('csv').save(f'{raw_folder_path}/circuits.csv')
 
-# Read the saved CSV file as a Spark DataFrame
-spark_df = spark.read.csv(f'{raw_folder_path}/circuits.csv', header=True)
+# # Read the saved CSV file as a Spark DataFrame
+# spark_df = spark.read.csv(f'{raw_folder_path}/circuits.csv', header=True)
 
-# Display the Spark DataFrame
-# display(spark_df).limit(10)
+# # Display the Spark DataFrame
+# # display(spark_df).limit(10)
 
 # COMMAND ----------
 
