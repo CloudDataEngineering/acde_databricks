@@ -1,8 +1,8 @@
 -- Databricks notebook source
-drop database if exists hive_metastore.f1_processed;
+drop database if exists hive_metastore.f1_processed cascade;
 
 create database if not exists hive_metastore.f1_processed
-location '/mnt/adlsacde/processed' ;
+location '/mnt/acdeadls/processed' ;
 
 -- COMMAND ----------
 
