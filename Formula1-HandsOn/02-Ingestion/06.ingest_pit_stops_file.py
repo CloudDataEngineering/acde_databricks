@@ -10,13 +10,13 @@
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-# display(dbutils.fs.ls('/mnt/adlsacde/raw'))
+# display(dbutils.fs.ls('/mnt/acdeadls/raw'))
 
 # display(spark.read.option('multiline', 'true'). \
-        # json('/mnt/adlsacde/raw/pit_stops.json'))
+        # json('/mnt/acdeadls/raw/pit_stops.json'))
 
 # df = spark.read.option('multiline', 'true'). \
-#     json('/mnt/adlsacde/raw/pit_stops.json')
+#     json('/mnt/acdeadls/raw/pit_stops.json')
 
 # df.schema
 
@@ -33,7 +33,7 @@ pit_stops_schema = StructType([StructField('raceId', IntegerType(), False),
 
 pit_stops_df = spark.read.schema(pit_stops_schema).\
                         option('multiline', 'true'). \
-                        json('/mnt/adlsacde/raw/pit_stops.json')
+                        json('/mnt/acdeadls/raw/pit_stops.json')
 
 display(pit_stops_df.limit(10))
 
@@ -63,10 +63,10 @@ display(pit_stops_rename_df.limit(10))
 
 # display(dbutils.fs.mounts())
 # pit_stops_rename_df.write.mode('overwrite').\
-#     parquet('/mnt/adlsacde/processed/pitstops')
+#     parquet('/mnt/acdeadls/processed/pitstops')
 
 pit_stops_rename_df.write.mode('overwrite')\
     .format('parquet').saveAsTable('hive_metastore.f1_processed.pitstops')
 
-display(spark.read.parquet('/mnt/adlsacde/processed/pitstops').limit(10))
+display(spark.read.parquet('/mnt/acdeadls/processed/pitstops').limit(10))
 

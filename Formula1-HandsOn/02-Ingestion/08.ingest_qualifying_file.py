@@ -10,9 +10,9 @@
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-# display(dbutils.fs.ls('dbfs:/mnt/adlsacde/raw/qualifying/'))
+# display(dbutils.fs.ls('dbfs:/mnt/acdeadls/raw/qualifying/'))
 
-# df = spark.read.option('multiline', 'true').json('dbfs:/mnt/adlsacde/raw/qualifying/qualifying_split_1.json')
+# df = spark.read.option('multiline', 'true').json('dbfs:/mnt/acdeadls/raw/qualifying/qualifying_split_1.json')
 # display(df.limit(10))
 
 # display(df.schema)
@@ -32,18 +32,18 @@ qualifying_schema = StructType([StructField('constructorId', IntegerType(), Fals
 
 qualifying_df = spark.read.\
                 option('multiline', 'true').\
-                schema(qualifying_schema).json('dbfs:/mnt/adlsacde/raw/qualifying/*').\
+                schema(qualifying_schema).json('dbfs:/mnt/acdeadls/raw/qualifying/*').\
                 withColumnRenamed('constructorId', 'constructor_id').\
                 withColumnRenamed('driverId', 'driver_id').\
                 withColumnRenamed('qualifyId', 'qualifying_id').\
                 withColumnRenamed('raceId', 'race_id').\
                 withColumn('ingestion_time', current_timestamp())
 
-# qualifying_df.write.mode('append').parquet('/mnt/adlsacde/processed/qualifying')
+# qualifying_df.write.mode('append').parquet('/mnt/acdeadls/processed/qualifying')
 
 qualifying_df.write.mode('append').format('parquet').saveAsTable('hive_metastore.f1_processed.qualifying')
 
-display(spark.read.parquet('/mnt/adlsacde/processed/qualifying').limit(10))
+display(spark.read.parquet('/mnt/acdeadls/processed/qualifying').limit(10))
 
 # COMMAND ----------
 

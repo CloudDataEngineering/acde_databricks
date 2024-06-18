@@ -32,7 +32,7 @@ driver_schema = StructType([StructField('driverId', IntegerType(), True),
 
 driver_df = spark.read.\
     schema(driver_schema).\
-    json('/mnt/adlsacde/raw/drivers.json')
+    json('/mnt/acdeadls/raw/drivers.json')
 
 display(driver_df.limit(10))
 
@@ -84,4 +84,4 @@ driver_final_df.write.mode('overwrite').format('parquet').saveAsTable('hive_meta
 
 # COMMAND ----------
 
-display(spark.read.parquet('/mnt/adlsacde/processed/driver'))
+display(spark.read.parquet('/mnt/acdeadls/processed/driver'))

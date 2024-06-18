@@ -10,9 +10,9 @@
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-# display(dbutils.fs.ls("dbfs:/mnt/adlsacde/raw/lap_times/"))
+# display(dbutils.fs.ls("dbfs:/mnt/acdeadls/raw/lap_times/"))
 
-# display(spark.read.csv('dbfs:/mnt/adlsacde/raw/lap_times/lap_times_split_1.csv'))
+# display(spark.read.csv('dbfs:/mnt/acdeadls/raw/lap_times/lap_times_split_1.csv'))
 
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 
@@ -25,7 +25,7 @@ lap_times_schema = StructType([StructField("raceId", IntegerType(), False),
                                 ])
 
 lap_times_df = spark.read.schema(lap_times_schema).\
-                csv("dbfs:/mnt/adlsacde/raw/lap_times/*")
+                csv("dbfs:/mnt/acdeadls/raw/lap_times/*")
 
 # display(lap_times_df.limit(10))
 display(lap_times_df.count())
@@ -56,9 +56,9 @@ display(lap_final_df.limit(10))
 
 # display(dbutils.fs.mounts())
 
-# lap_final_df.write.mode('overwrite').parquet('/mnt/adlsacde/processed/laptimes')
+# lap_final_df.write.mode('overwrite').parquet('/mnt/acdeadls/processed/laptimes')
 
 lap_final_df.write.mode('overwrite').format('parquet').saveAsTable('hive_metastore.f1_processed.laptimes')
 
-# display(spark.read.parquet('/mnt/adlsacde/processed/laptimes').limit(10))
-display(spark.read.parquet('/mnt/adlsacde/processed/laptimes').count())
+# display(spark.read.parquet('/mnt/acdeadls/processed/laptimes').limit(10))
+display(spark.read.parquet('/mnt/acdeadls/processed/laptimes').count())

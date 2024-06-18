@@ -110,7 +110,7 @@ races_selected_df.write.mode('overwrite').format('parquet').saveAsTable('hive_me
 
 # COMMAND ----------
 
-display(spark.read.parquet('/mnt/adlsacde/processed/races').limit(10))
+# display(spark.read.parquet('/mnt/acdeadls/processed/races').limit(10))
 
 # COMMAND ----------
 

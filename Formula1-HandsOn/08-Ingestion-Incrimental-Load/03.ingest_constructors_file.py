@@ -73,7 +73,7 @@ display(constructor_final_df.limit(10))
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-display(dbutils.fs.ls('/mnt/adlsacde/processed'))
+# display(dbutils.fs.ls('/mnt/adlsacde/processed'))
 
 # COMMAND ----------
 
