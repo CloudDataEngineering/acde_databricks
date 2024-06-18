@@ -4,7 +4,8 @@
 
 # COMMAND ----------
 
-# MAGIC %fs mkdirs dbfs:/FileStore/files/babynames
+# %fs mkdirs dbfs:/FileStore/files/babynames
+display(dbutils.fs.ls('FileStore/tables/'))
 
 # COMMAND ----------
 

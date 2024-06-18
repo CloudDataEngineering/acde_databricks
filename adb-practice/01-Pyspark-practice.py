@@ -1,5 +1,5 @@
 # Databricks notebook source
-dbutils.fs.ls('dbfs:/FileStore/files/babynames')
+dbutils.fs.ls('FileStore/tables')
 
 # COMMAND ----------
 
