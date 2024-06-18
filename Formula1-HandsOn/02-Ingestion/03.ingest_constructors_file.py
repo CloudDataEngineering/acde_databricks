@@ -9,13 +9,21 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../03-Includes/01-Configuration"
+
+# COMMAND ----------
+
+# MAGIC %run "../03-Includes/02-common_functions"
+
+# COMMAND ----------
+
 # display(dbutils.fs.mounts())
-# display(dbutils.fs.ls("/mnt/adlsacde/raw"))
-# display(dbutils.fs.ls("/mnt/adlsacde/raw/constructors.json"))
+# display(dbutils.fs.ls("/mnt/acdeadls/raw"))
+# display(dbutils.fs.ls("/mnt/acdeadls/raw/constructors.json"))
 
 constructor_schema = 'constructorId INT, constructorRef STRING ,name STRING, nationality STRING, url STRING'
 
-constructor_df = spark.read.json("/mnt/adlsacde/raw/constructors.json", schema=constructor_schema)
+constructor_df = spark.read.json("/mnt/acdeadls/raw/constructors.json", schema=constructor_schema)
 
 display(constructor_df.limit(10))
 
@@ -55,17 +63,17 @@ display(constructor_final_df.limit(10))
 # COMMAND ----------
 
 # display(dbutils.fs.mounts())
-display(dbutils.fs.ls('/mnt/adlsacde/processed'))
+display(dbutils.fs.ls('/mnt/acdeadls/processed'))
 
 # COMMAND ----------
 
-# constructor_final_df.write.mode('overwrite').parquet('/mnt/adlsacde/processed/constructor')
+# constructor_final_df.write.mode('overwrite').parquet('/mnt/acdeadls/processed/constructor')
 
 constructor_final_df.write.mode('overwrite').format('parquet').saveAsTable('hive_metastore.f1_processed.constructor')
 
-# display(dbutils.fs.ls('/mnt/adlsacde/processed/constructor'))
+# display(dbutils.fs.ls('/mnt/acdeadls/processed/constructor'))
 
 
 # COMMAND ----------
 
-display(spark.read.parquet('/mnt/adlsacde/processed/constructor'))
+display(spark.read.parquet('/mnt/acdeadls/processed/constructor'))

@@ -23,6 +23,29 @@ display(dbutils.fs.mounts())
 
 # COMMAND ----------
 
+import pandas as pd
+from pyspark.sql import SparkSession
+
+# Create SparkSession
+spark = SparkSession.builder.getOrCreate()
+
+# Read the pandas DataFrame
+df_circuits = pd.read_csv('https://raw.githubusercontent.com/CloudDataEngineering/acde_databricks/main/raw/files/formula1/circuits.csv')
+
+# Convert pandas DataFrame to Spark DataFrame
+spark_df_circuits = spark.createDataFrame(df_circuits)
+
+# Write Spark DataFrame to CSV
+spark_df_circuits.write.mode('overwrite').option('header', 'true').option('inferSchema', 'true').format('csv').save(f'{raw_folder_path}/circuits.csv')
+
+# Read the saved CSV file as a Spark DataFrame
+spark_df = spark.read.csv(f'{raw_folder_path}/circuits.csv', header=True)
+
+# Display the Spark DataFrame
+# display(spark_df).limit(10)
+
+# COMMAND ----------
+
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType
 
 circuits_schema = StructType(fields=[StructField("circuitId", IntegerType(), False),
@@ -59,7 +82,7 @@ display(circuits_df.limit(10))
 
 # display(dbutils.fs.mounts())
 # display(dbutils.fs.ls('/mnt/adlsacde/raw'))
-display(dbutils.fs.ls(f'{raw_folder_path}/lap_times'))
+# display(dbutils.fs.ls(f'{raw_folder_path}/lap_times'))
 
 # COMMAND ----------
 
